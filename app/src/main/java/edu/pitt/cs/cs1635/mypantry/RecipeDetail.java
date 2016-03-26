@@ -59,45 +59,23 @@ public class RecipeDetail extends AppCompatActivity
         name = intent.getStringExtra("RECIPE_NAME");
         directions = intent.getStringExtra("RECIPE_DIRECTIONS");
         ingredients  = intent.getStringArrayListExtra("RECIPE_ING");
-        //Bundle b = intent.getExtras();
-        //ArrayList<TempData> rec = b.getParcelableArrayList("TEMP_ARRAY");
-
-       /* if(rec.size()>0){
-            for(int i=0; i<rec.size(); i++){
-                if (rec.get(i).getName().equals(recipe_name)){
-                    name = recipe_name;
-                    ingredients = rec.get(i).getIngredients();
-                    directions = rec.get(i).getDirections();
-                    break;
-                }else {
-                    name = recipe_name;
-                    ingredients = new ArrayList<>();
-                    ingredients.add("not found");
-                    directions = "not found";
-                }
-            }
-        }else {
-            name = recipe_name;
-            ingredients = new ArrayList<>();
-            ingredients.add("not found");
-            directions = "not found";
-        }*/
 
 
         TextView r = (TextView) this.findViewById(R.id.rec_name);
         r.setText(name);
 
-       /* ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.content_recipe_detail, R.id.rec_ingredients, ingredients);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.list, ingredients);
         ListView listView = (ListView) findViewById(R.id.listView2);
-        listView.setAdapter(adapter);*/
-        LinearLayout r2 = (LinearLayout) this.findViewById(R.id.rec_ingredients);
+        listView.setAdapter(adapter);
+
+       /* LinearLayout r2 = (LinearLayout) this.findViewById(R.id.rec_ingredients);
         for(int j=0; j<ingredients.size(); j++){
             TextView r3 = new TextView(this);
             r3.setText(ingredients.get(j).toString());
             r3.setTextAppearance(this, android.R.style.TextAppearance_Large);
             r3.setPadding(0, 20, 0, 20);
             r2.addView(r3);
-        }
+        }*/
         TextView r4 = (TextView) this.findViewById(R.id.rec_directions);
         r4.setText(directions);
 

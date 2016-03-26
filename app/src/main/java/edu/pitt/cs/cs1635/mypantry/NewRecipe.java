@@ -24,10 +24,10 @@ import java.util.ArrayList;
 public class NewRecipe extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static ArrayList<String> ingredients = new ArrayList<> ();
+    public ArrayList<String> ingredients = new ArrayList<> ();
     Context context;
-    public static int numIngredients = 0;
-    public static ArrayAdapter adapter;
+    public int numIngredients = 0;
+    public ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

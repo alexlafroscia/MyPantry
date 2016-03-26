@@ -19,6 +19,11 @@ tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
     android:orientation="vertical"
     android:weightSum="28">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -33,8 +38,8 @@ tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
         android:layout_height="0dp"
         android:hint="Enter Name of Recipe"
         android:clickable="false"
-        android:paddingBottom="30dp"
-        android:layout_weight="3" />
+        android:layout_weight="3"
+        android:paddingTop="10dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,13 +53,6 @@ tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
         android:textStyle="bold"
         android:textAppearance= "?android:attr/textAppearanceLarge"
         android:layout_weight="2" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:id="@+id/listView"
-        android:layout_gravity="bottom"
-        android:layout_weight="5" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -80,8 +78,16 @@ tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
             android:layout_row="0"
             android:layout_column="2"
             android:nestedScrollingEnabled="false"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
     </GridLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/listView"
+        android:layout_gravity="bottom"
+        android:layout_weight="5" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -103,7 +109,6 @@ tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
         android:layout_height="0dp"
         android:hint="Enter Directions"
         android:clickable="false"
-        android:paddingBottom="30dp"
         android:layout_weight="5" />
 
     <FrameLayout
@@ -118,7 +123,9 @@ tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
         android:id="@+id/addRecipeButton"
         android:layout_gravity="center_horizontal"
         android:nestedScrollingEnabled="false"
-        android:onClick="submitRecipe" />
+        android:onClick="submitRecipe"
+        android:textStyle="bold"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
 </LinearLayout>
 

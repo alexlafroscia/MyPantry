@@ -27,10 +27,10 @@ import java.util.ArrayList;
 public class Recipes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ArrayList<TempData> rec = new ArrayList<>();
+    public static ArrayList<TempData> rec = new ArrayList<>();
     public final static String RECIPE_NAME = "RECIPE_NAME";
-
-    Context context;
+    public static ArrayAdapter adapter;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +58,13 @@ public class Recipes extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        populateTemp();
+        if(rec.size() == 0){
+            populateTemp();
+        }
 
 
-        ArrayAdapter adapter = new ArrayAdapter<TempData>(this, R.layout.content_recipes, R.id.list_text, rec);
+
+        adapter = new ArrayAdapter<TempData>(this, R.layout.content_recipes, R.id.list_text, rec);
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
 
@@ -89,7 +92,8 @@ public class Recipes extends AppCompatActivity
                 String directions = data.getStringExtra("new_directions");
                 ArrayList<String> ingredients = data.getStringArrayListExtra("new_ingredients");
                 TempData temp = new TempData(name, ingredients, directions);
-
+                rec.add(temp);
+                adapter.notifyDataSetChanged();
             }
         }
     }
