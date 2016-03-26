@@ -36,15 +36,6 @@ public class RecipeDetail extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -68,17 +59,8 @@ public class RecipeDetail extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.listView2);
         listView.setAdapter(adapter);
 
-       /* LinearLayout r2 = (LinearLayout) this.findViewById(R.id.rec_ingredients);
-        for(int j=0; j<ingredients.size(); j++){
-            TextView r3 = new TextView(this);
-            r3.setText(ingredients.get(j).toString());
-            r3.setTextAppearance(this, android.R.style.TextAppearance_Large);
-            r3.setPadding(0, 20, 0, 20);
-            r2.addView(r3);
-        }*/
         TextView r4 = (TextView) this.findViewById(R.id.rec_directions);
         r4.setText(directions);
-
 
     }
 
@@ -91,7 +73,7 @@ public class RecipeDetail extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -113,7 +95,7 @@ public class RecipeDetail extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

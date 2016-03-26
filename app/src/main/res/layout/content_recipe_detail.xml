@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.pitt.cs.cs1635.mypantry.RecipeDetail"
-     -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll1"
@@ -17,14 +8,15 @@
     android:paddingRight="16dp"
     android:orientation="vertical"
     android:weightSum="14"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:nestedScrollingEnabled="true">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Recipe Name: "
+            android:text="@string/recipe_name"
             android:id="@+id/textView2"
             android:textStyle="bold"
             android:layout_weight="1" />
@@ -41,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Ingredients: "
+            android:text="@string/ingredients"
             android:id="@+id/textView3"
             android:textStyle="bold"
             android:layout_weight="1" />
@@ -57,23 +49,30 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></FrameLayout>
+        android:layout_weight="1"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Directions"
+            android:text="@string/directions"
             android:id="@+id/textView4"
             android:textStyle="bold"
             android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/rec_directions"
-            android:layout_weight="4" />
-    </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/scrollView"
+        android:layout_weight="5">
 
-<!--/android.support.v4.widget.NestedScrollView-->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/rec_directions"
+                android:scrollbars = "vertical" />
+    </ScrollView>
+
+</LinearLayout>
+

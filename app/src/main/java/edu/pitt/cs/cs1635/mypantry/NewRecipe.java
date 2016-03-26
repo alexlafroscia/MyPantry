@@ -35,14 +35,6 @@ public class NewRecipe extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = this;
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -66,9 +58,6 @@ public class NewRecipe extends AppCompatActivity
                 String ing = entry.getText().toString();
                 ingredients.add(ing);
                 numIngredients++;
-               // adapter.add(ing);
-                //adapter.clear();
-               // adapter.addAll(ingredients);
                 adapter.notifyDataSetChanged();
                 entry.setText("");
             }
@@ -99,7 +88,7 @@ public class NewRecipe extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -121,7 +110,7 @@ public class NewRecipe extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
