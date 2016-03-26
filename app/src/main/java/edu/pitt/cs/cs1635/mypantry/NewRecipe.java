@@ -1,5 +1,6 @@
 package edu.pitt.cs.cs1635.mypantry;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,25 +14,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity
+import java.util.ArrayList;
+
+public class NewRecipe extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static ArrayList<String> ingredients = new ArrayList<> ();
+    Context context;
+    public static int numIngredients = 0;
+    public static ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_new_recipe);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        context = this;
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,7 +52,43 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        adapter = new ArrayAdapter<>(this, R.layout.list, ingredients);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
+        Button button = (Button)findViewById(R.id.button_add);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                EditText entry = (EditText) findViewById(R.id.new_ingredient);
+                String ing = entry.getText().toString();
+                ingredients.add(ing);
+                numIngredients++;
+               // adapter.add(ing);
+                //adapter.clear();
+               // adapter.addAll(ingredients);
+                adapter.notifyDataSetChanged();
+                entry.setText("");
+            }
+        });
+
     }
+
+    public void submitRecipe(View v){
+        String name = ((EditText) findViewById(R.id.new_name)).getText().toString();
+        String directions = ((EditText) findViewById(R.id.new_directions)).getText().toString();
+
+        Intent intent = new Intent();
+        intent.putExtra("new_name", name);
+        intent.putExtra("new_ingredients", ingredients);
+        intent.putExtra("new_directions", directions);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -56,7 +103,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.new_recipe, menu);
         return true;
     }
 

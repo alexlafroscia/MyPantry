@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context="edu.pitt.cs.cs1635.mypantry.NewRecipe"
+    -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    android:weightSum="28">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Recipe Name:"
+        android:textStyle="bold"
+        android:textAppearance= "?android:attr/textAppearanceLarge"
+        android:layout_weight="2" />
+
+    <EditText
+        android:id="@+id/new_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:hint="Enter Name of Recipe"
+        android:clickable="false"
+        android:paddingBottom="30dp"
+        android:layout_weight="3" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Ingredients: "
+        android:textStyle="bold"
+        android:textAppearance= "?android:attr/textAppearanceLarge"
+        android:layout_weight="2" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/listView"
+        android:layout_gravity="bottom"
+        android:layout_weight="5" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <EditText
+            android:id="@+id/new_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Ingredient"
+            android:clickable="false"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/button_add"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:nestedScrollingEnabled="false"
+            android:layout_gravity="center_vertical" />
+    </GridLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Directions"
+        android:id="@+id/textView5"
+        android:textStyle="bold"
+        android:layout_weight="2" />
+
+    <EditText
+        android:id="@+id/new_directions"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:hint="Enter Directions"
+        android:clickable="false"
+        android:paddingBottom="30dp"
+        android:layout_weight="5" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Recipe"
+        android:id="@+id/addRecipeButton"
+        android:layout_gravity="center_horizontal"
+        android:nestedScrollingEnabled="false"
+        android:onClick="submitRecipe" />
+
+</LinearLayout>
+
+<!--/android.support.v4.widget.NestedScrollView-->
