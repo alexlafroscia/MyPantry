@@ -9,7 +9,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="RestClient.db" />
@@ -26,6 +25,28 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Recipes"
+            android:label="@string/title_activity_recipes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RecipeDetail"
+            android:label="@string/title_activity_recipe_detail"
+            android:parentActivityName=".Recipes"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.pitt.cs.cs1635.mypantry.Recipes" />
+        </activity>
+        <activity
+            android:name=".NewRecipe"
+            android:label="@string/title_activity_new_recipe"
+            android:parentActivityName=".Recipes"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.pitt.cs.cs1635.mypantry.Recipes" />
         </activity>
     </application>
 
