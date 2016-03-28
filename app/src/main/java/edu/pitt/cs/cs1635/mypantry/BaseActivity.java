@@ -42,6 +42,9 @@ public class BaseActivity extends AppCompatActivity
         if (id == R.id.nav_recipes){
             Intent intent = new Intent(this, Recipes.class);
             startActivity(intent);
+        } else if (id == R.id.pantry) {
+            Intent intent = new Intent(this, Pantry.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
