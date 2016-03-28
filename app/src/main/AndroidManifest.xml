@@ -57,6 +57,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.pitt.cs.cs1635.mypantry.Pantry" />
         </activity>
+        <activity android:name=".GroceryListActivity"></activity>
     </application>
 
 </manifest>
