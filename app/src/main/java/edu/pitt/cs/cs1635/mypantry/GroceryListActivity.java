@@ -18,7 +18,7 @@ public class GroceryListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -28,6 +28,9 @@ public class GroceryListActivity extends BaseActivity {
         toggle.syncState();
 
         initNavigationDrawer();
+
+        Snackbar.make(findViewById(R.id.glistContainer), "Hey there!", Snackbar.LENGTH_LONG).show();
+
     }
 
     @Override
