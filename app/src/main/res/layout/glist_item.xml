@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:padding="4dp"
+        android:background="#b0b0b0"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_weight="0.06">
+        <!--What you want to show in SurfaceView-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="#f0f0f0"
+            android:id="@+id/editText"
+            android:text="hello"
+            android:textSize="28dp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
+    <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="16dp">
+        <!-- Bottom View Start-->
+        <!-- Bottom View End-->
+
+        <!-- Surface View Start -->
+
+        <LinearLayout
+            android:background="#66ddff00"
+            android:id="@+id/bottom_wrapper"
+            android:layout_width="160dp"
+            android:weightSum="1"
+            android:layout_height="match_parent">
+            <!--What you want to show-->
+        </LinearLayout>
+        <!-- Surface View End -->
+    </com.daimajia.swipe.SwipeLayout>
+
+
+</LinearLayout>
