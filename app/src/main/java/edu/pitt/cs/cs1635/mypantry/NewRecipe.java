@@ -7,9 +7,11 @@ import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class NewRecipe extends BaseActivity {
     Context context;
     public int numIngredients = 0;
     public ArrayAdapter adapter;
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +41,7 @@ public class NewRecipe extends BaseActivity {
         initNavigationDrawer();
 
         adapter = new ArrayAdapter<>(this, R.layout.list, ingredients);
-        ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
         Button button = (Button)findViewById(R.id.button_add);
@@ -51,6 +55,7 @@ public class NewRecipe extends BaseActivity {
                 numIngredients++;
                 adapter.notifyDataSetChanged();
                 entry.setText("");
+                setListViewHeightBasedOnChildren(listView);
             }
         });
 
@@ -67,4 +72,25 @@ public class NewRecipe extends BaseActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
 }
