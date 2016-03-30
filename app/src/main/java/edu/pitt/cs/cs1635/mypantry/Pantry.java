@@ -17,7 +17,6 @@ public class Pantry extends BaseActivity {
     Button btn2;
     Button btn3;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +40,6 @@ public class Pantry extends BaseActivity {
         toggle.syncState();
 
         initNavigationDrawer();
-
         btn1 = (Button) findViewById(R.id.amt1);
         btn2 = (Button) findViewById(R.id.amt2);
         btn3 = (Button) findViewById(R.id.button);
@@ -67,7 +65,7 @@ public class Pantry extends BaseActivity {
             }
         });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(btn2.getText().equals("High")){
@@ -88,7 +86,7 @@ public class Pantry extends BaseActivity {
             }
         });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(btn3.getText().equals("High")){
