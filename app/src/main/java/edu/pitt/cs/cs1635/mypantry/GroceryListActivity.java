@@ -1,6 +1,7 @@
 package edu.pitt.cs.cs1635.mypantry;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -92,6 +95,14 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
+        Log.d("MyPantry","add tapped\n");
+        Dialog dialogview= dialog.getDialog();
+        EditText edit = (EditText) dialogview.findViewById(R.id.dialog_new_item);
+        if(edit!=null){
+            Snackbar.make(findViewById(R.id.glistContainer),"Added item: "+edit.getText(),Snackbar.LENGTH_LONG).show();
+        }else{
+            Log.d("MyPantry","Edittext no found!");
+        }
 
     }
 
