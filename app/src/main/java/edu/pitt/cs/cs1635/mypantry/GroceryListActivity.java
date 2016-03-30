@@ -1,5 +1,9 @@
 package edu.pitt.cs.cs1635.mypantry;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
-public class GroceryListActivity extends BaseActivity {
+public class GroceryListActivity extends BaseActivity implements AddgListItemDialogFragment.AddListItemDialogListener{
+
+    public static Context context;
+    public static ArrayList<TempData> listitems = new ArrayList<>();
+    public static ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +33,18 @@ public class GroceryListActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
 
+        context=this;
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_btn);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //add a new item to the list!
+                showDialog();
+
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -29,8 +53,22 @@ public class GroceryListActivity extends BaseActivity {
 
         initNavigationDrawer();
 
-        Snackbar.make(findViewById(R.id.glistContainer), "Hey there!", Snackbar.LENGTH_LONG).show();
+        if(listitems.size()==0){
+            populateList();
+        }
 
+        adapter= new ArrayAdapter<TempData>(this, R.layout.glist_item);
+        ListView lv = (ListView)findViewById(R.id.g_list);
+        lv.setAdapter(adapter);
+        lv.setClickable(false);
+
+
+        Snackbar.make(findViewById(R.id.glistContainer), "Grocery List -- tap + to add an item!", Snackbar.LENGTH_LONG).show();
+
+    }
+
+    private void populateList() {
+        //add stuff to the list here!
     }
 
     @Override
@@ -44,5 +82,21 @@ public class GroceryListActivity extends BaseActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showDialog(){
+        DialogFragment dialog = new AddgListItemDialogFragment();
+        dialog.show(getFragmentManager(),"Tag");
+    }
+
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
