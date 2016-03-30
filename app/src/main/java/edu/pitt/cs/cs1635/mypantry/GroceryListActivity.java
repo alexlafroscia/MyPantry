@@ -109,6 +109,10 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
             String txt = edit.getText().toString();
             if(txt.equals(""))
                 return;
+            if(listitems.contains(txt)){
+                Snackbar.make(findViewById(R.id.glistContainer),"Item is already in List!",Snackbar.LENGTH_LONG).show();
+                return;
+            }
             listitems.add(txt);
             adapter.notifyDataSetChanged();
             Snackbar.make(findViewById(R.id.glistContainer),"Added item: "+txt,Snackbar.LENGTH_LONG).show();
