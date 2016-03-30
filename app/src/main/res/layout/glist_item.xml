@@ -1,47 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    android:id="@+id/glist_item">
+<?xml version="1.0" encoding="utf-8" ?>
+<com.daimajia.swipe.SwipeLayout
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    swipe:leftEdgeSwipeOffset="0dp"
+    swipe:rightEdgeSwipeOffset="0dp"
+    tools:context=".GroceryListActivity">
 
     <LinearLayout
-        android:padding="4dp"
-        android:background="#b0b0b0"
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_weight="0.06">
-        <!--What you want to show in SurfaceView-->
+        android:background="#FF5534"
+        android:tag="Bottom3"
+        android:weightSum="10"
+        android:saveEnabled="false"
+        android:paddingTop="0dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <Space
+            android:layout_width="100px"
+            android:layout_height="20px" />
 
-            android:background="#f0f0f0"
-            android:id="@+id/item_text"
-            android:text="hello"
-            android:textSize="28dp"
-            android:textStyle="normal" />
+        <Button
+            android:id="@+id/remove_item"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:background="#fff"
+            android:text="Remove Item"
+            android:textColor="#FF5534"
+            android:clickable="true"
+            android:layout_weight="1.17"
+            android:layout_gravity="center_vertical" />
 
+        <Space
+            android:layout_width="50px"
+            android:layout_height="20px" />
+
+        <Button
+            android:id="@+id/bought"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:background="#fff"
+            android:text="Item Bought"
+            android:textColor="#FF5534"
+            android:clickable="true"
+            android:layout_weight="1.17"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
-    <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="16dp">
-        <!-- Bottom View Start-->
-        <!-- Bottom View End-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_selector"
+        android:padding="7dp"
+        android:visibility="visible">
 
-        <!-- Surface View Start -->
+        <TextView
+            android:id="@+id/text_data"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:tag="Hover"
+            android:textSize="18sp"
+            android:text="Text goes here" />
 
-        <LinearLayout
-            android:background="#66ddff00"
-            android:id="@+id/bottom_wrapper"
-            android:layout_width="160dp"
-            android:weightSum="1"
-            android:layout_height="match_parent">
-            <!--What you want to show-->
-        </LinearLayout>
-        <!-- Surface View End -->
-    </com.daimajia.swipe.SwipeLayout>
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-
-</LinearLayout>
+    </LinearLayout>
+</com.daimajia.swipe.SwipeLayout>

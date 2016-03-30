@@ -21,11 +21,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.mypantry.model.GListItem;
+
 
 public class GroceryListActivity extends BaseActivity implements AddgListItemDialogFragment.AddListItemDialogListener{
 
     public static Context context;
-    public static ArrayList<String> listitems = new ArrayList<>();
+    public static ArrayList<GListItem> listitems = new ArrayList<GListItem>();
     public static ArrayAdapter adapter;
 
     @Override
@@ -60,7 +62,8 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
             populateList();
         }
 
-        adapter= new ArrayAdapter<String>(this, R.layout.list,listitems);
+        adapter= new GListItemAdapter(this,listitems);
+                //ArrayAdapter<GListItem>(this, R.layout.list,listitems);
         ListView lv = (ListView)findViewById(R.id.g_list);
         lv.setAdapter(adapter);
         lv.setClickable(false);
@@ -76,9 +79,9 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
         String one="Bread";
         String two="Orange Juice";
         String three="Bananas";
-        listitems.add(one);
-        listitems.add(three);
-        listitems.add(two);
+        listitems.add(new GListItem(one,""));
+        listitems.add(new GListItem(three,""));
+        listitems.add(new GListItem(two,""));
     }
 
     @Override
@@ -113,7 +116,7 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
                 Snackbar.make(findViewById(R.id.glistContainer),"Item is already in List!",Snackbar.LENGTH_LONG).show();
                 return;
             }
-            listitems.add(txt);
+            listitems.add(new GListItem(txt,""));
             adapter.notifyDataSetChanged();
             Snackbar.make(findViewById(R.id.glistContainer),"Added item: "+txt,Snackbar.LENGTH_LONG).show();
         }else{
