@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class GroceryListActivity extends BaseActivity implements AddgListItemDialogFragment.AddListItemDialogListener{
 
     public static Context context;
-    public static ArrayList<TempData> listitems = new ArrayList<>();
+    public static ArrayList<String> listitems = new ArrayList<>();
     public static ArrayAdapter adapter;
 
     @Override
@@ -60,10 +60,11 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
             populateList();
         }
 
-        adapter= new ArrayAdapter<TempData>(this, R.layout.glist_item);
+        adapter= new ArrayAdapter<String>(this, R.layout.list,listitems);
         ListView lv = (ListView)findViewById(R.id.g_list);
         lv.setAdapter(adapter);
         lv.setClickable(false);
+
 
 
         Snackbar.make(findViewById(R.id.glistContainer), "Grocery List -- tap + to add an item!", Snackbar.LENGTH_LONG).show();
@@ -72,6 +73,12 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
 
     private void populateList() {
         //add stuff to the list here!
+        String one="Bread";
+        String two="Orange Juice";
+        String three="Bananas";
+        listitems.add(one);
+        listitems.add(three);
+        listitems.add(two);
     }
 
     @Override
@@ -99,7 +106,12 @@ public class GroceryListActivity extends BaseActivity implements AddgListItemDia
         Dialog dialogview= dialog.getDialog();
         EditText edit = (EditText) dialogview.findViewById(R.id.dialog_new_item);
         if(edit!=null){
-            Snackbar.make(findViewById(R.id.glistContainer),"Added item: "+edit.getText(),Snackbar.LENGTH_LONG).show();
+            String txt = edit.getText().toString();
+            if(txt.equals(""))
+                return;
+            listitems.add(txt);
+            adapter.notifyDataSetChanged();
+            Snackbar.make(findViewById(R.id.glistContainer),"Added item: "+txt,Snackbar.LENGTH_LONG).show();
         }else{
             Log.d("MyPantry","Edittext no found!");
         }
