@@ -6,6 +6,10 @@
             android:id="@+id/nav_recipes"
             android:icon="@android:drawable/ic_dialog_dialer"
             android:title="Recipes" />
+        <item
+            android:id="@+id/pantry"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Pantry" />
     </group>
 
     <item android:title="Configuration">
