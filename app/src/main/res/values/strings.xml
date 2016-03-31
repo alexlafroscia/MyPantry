@@ -17,4 +17,7 @@
     <string name="directions">Directions:</string>
     <string name="enter_directions">Enter Directions</string>
     <string name="add_recipe">Add Recipe</string>
+    <string name="dialog_add_item">Add an item to the Grocery List</string>
+    <string name="dialog_add">Add</string>
+    <string name="dialog_cancel">Cancel</string>
 </resources>
