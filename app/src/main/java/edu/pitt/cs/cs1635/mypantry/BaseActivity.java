@@ -42,12 +42,10 @@ public class BaseActivity extends AppCompatActivity
         if (id == R.id.nav_recipes){
             Intent intent = new Intent(this, Recipes.class);
             startActivity(intent);
-        } else if (id == R.id.pantry) {
+        } else if (id == R.id.nav_pantry) {
             Intent intent = new Intent(this, Pantry.class);
             startActivity(intent);
-        }
-
-        if (id == R.id.nav_grocerylist){
+        } else if (id == R.id.nav_grocerylist){
             Intent intent = new Intent(this, GroceryListActivity.class);
             startActivity(intent);
         }

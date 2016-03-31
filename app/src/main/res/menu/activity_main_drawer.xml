@@ -7,9 +7,9 @@
             android:icon="@android:drawable/ic_dialog_dialer"
             android:title="Recipes" />
         <item
-            android:id="@+id/nav_grocerylist"
+            android:id="@+id/nav_pantry"
             android:icon="@android:drawable/ic_menu_sort_by_size"
-            android:title="Grocery List" />
+            android:title="Pantry" />
         <item
             android:id="@+id/nav_grocerylist"
             android:icon="@android:drawable/ic_menu_sort_by_size"
