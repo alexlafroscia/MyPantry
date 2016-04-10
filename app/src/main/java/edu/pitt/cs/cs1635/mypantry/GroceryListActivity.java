@@ -1,13 +1,10 @@
 package edu.pitt.cs.cs1635.mypantry;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +18,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.mypantry.adapters.GListItemAdapter;
 import edu.pitt.cs.cs1635.mypantry.model.GListItem;
 
 

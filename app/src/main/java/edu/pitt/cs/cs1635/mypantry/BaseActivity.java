@@ -1,11 +1,18 @@
 package edu.pitt.cs.cs1635.mypantry;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import edu.pitt.cs.cs1635.mypantry.model.DaoMaster;
+import edu.pitt.cs.cs1635.mypantry.model.DaoSession;
+import edu.pitt.cs.cs1635.mypantry.model.ItemDao;
+import edu.pitt.cs.cs1635.mypantry.model.RecipeDao;
 
 /**
  * Base activity class to extend other activities from
@@ -17,6 +24,26 @@ import android.view.MenuItem;
  */
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    protected SQLiteDatabase db;
+
+    private DaoMaster daoMaster;
+    private DaoSession daoSession;
+
+    protected ItemDao itemDao;
+    protected RecipeDao recipeDao;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "pantry-db", null);
+        db = helper.getWritableDatabase();
+        daoMaster = new DaoMaster(db);
+        daoSession = daoMaster.newSession();
+        itemDao = daoSession.getItemDao();
+        recipeDao = daoSession.getRecipeDao();
+    }
 
     protected void initNavigationDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -47,6 +74,9 @@ public class BaseActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_grocerylist){
             Intent intent = new Intent(this, GroceryListActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
 

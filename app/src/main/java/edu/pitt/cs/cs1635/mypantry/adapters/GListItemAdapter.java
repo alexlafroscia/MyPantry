@@ -1,4 +1,4 @@
-package edu.pitt.cs.cs1635.mypantry;
+package edu.pitt.cs.cs1635.mypantry.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.mypantry.R;
 import edu.pitt.cs.cs1635.mypantry.model.GListItem;
 
 /**
