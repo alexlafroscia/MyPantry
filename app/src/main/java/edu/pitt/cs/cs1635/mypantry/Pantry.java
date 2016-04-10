@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.pitt.cs.cs1635.mypantry.adapters.PantryItemListAdapter;
+import edu.pitt.cs.cs1635.mypantry.model.Item;
 
 public class Pantry extends BaseActivity {
 
@@ -47,10 +48,14 @@ public class Pantry extends BaseActivity {
         toggle.syncState();
 
         initNavigationDrawer();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         // Set up pantry item list
         List itemList = this.itemDao.loadAll();
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.pantry_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         PantryItemListAdapter adapter = new PantryItemListAdapter(itemList);
@@ -60,7 +65,10 @@ public class Pantry extends BaseActivity {
     protected void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==1){
-            Log.d("DEBUG", data.getStringExtra("name"));
+            Item item = new Item();
+            item.setTitle(data.getStringExtra("name"));
+            this.itemDao.insertOrReplace(item);
+            Log.d("DEBUG", item.getTitle());
         }
     }
 
