@@ -25,7 +25,7 @@ import edu.pitt.cs.cs1635.mypantry.model.RecipeDao;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private SQLiteDatabase db;
+    protected SQLiteDatabase db;
 
     private DaoMaster daoMaster;
     private DaoSession daoSession;

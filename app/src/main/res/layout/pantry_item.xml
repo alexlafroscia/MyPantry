@@ -23,14 +23,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Amount: "
-                android:id="@+id/amtTxt1"
+                android:id="@+id/pantry_item_amount_text"
                 android:textSize="15dp" />
 
             <Button
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="High"
-                android:id="@+id/amt1" />
+                android:id="@+id/pantry_item_amount_button" />
 
             <Button
                 android:layout_width="70dp"
