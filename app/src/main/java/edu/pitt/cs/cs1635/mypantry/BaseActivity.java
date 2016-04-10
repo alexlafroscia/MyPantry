@@ -30,8 +30,8 @@ public class BaseActivity extends AppCompatActivity
     private DaoMaster daoMaster;
     private DaoSession daoSession;
 
-    private ItemDao itemDao;
-    private RecipeDao recipeDao;
+    protected ItemDao itemDao;
+    protected RecipeDao recipeDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

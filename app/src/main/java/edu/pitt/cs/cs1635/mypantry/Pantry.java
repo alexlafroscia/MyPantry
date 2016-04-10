@@ -6,11 +6,19 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+import java.util.List;
+
+import edu.pitt.cs.cs1635.mypantry.adapters.PantryItemListAdapter;
 
 public class Pantry extends BaseActivity {
 
@@ -39,28 +47,14 @@ public class Pantry extends BaseActivity {
         toggle.syncState();
 
         initNavigationDrawer();
-        btn1 = (Button) findViewById(R.id.amt1);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(btn1.getText().equals("High")){
-                    btn1.setText("Low");
-                    btn1.setTextColor(Color.YELLOW);
-                    ((TextView)findViewById(R.id.item1)).setTextColor(Color.YELLOW);
-                }
-                else if(btn1.getText().equals("Low")){
-                    btn1.setText("Out");
-                    btn1.setTextColor(Color.RED);
-                    ((TextView)findViewById(R.id.item1)).setTextColor(Color.RED);
-                }
-                else if(btn1.getText().equals("Out")){
-                    btn1.setText("High");
-                    btn1.setTextColor(Color.BLACK);
-                    ((TextView)findViewById(R.id.item1)).setTextColor(Color.BLACK);
-                }
-            }
-        });
+        // Set up pantry item list
+        List itemList = this.itemDao.loadAll();
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.pantry_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        PantryItemListAdapter adapter = new PantryItemListAdapter(itemList);
+        recyclerView.setAdapter(adapter);
     }
 
     protected void onActivityResult(int requestCode,int resultCode, Intent data){
