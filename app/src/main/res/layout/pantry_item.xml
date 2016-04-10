@@ -42,7 +42,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="Remove"
-                android:id="@+id/rem1" />
+                android:id="@+id/pantry_item_remove_button" />
         </LinearLayout>
         <!-- Bottom View End-->
 

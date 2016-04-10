@@ -35,7 +35,7 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
                 .inflate(R.layout.pantry_item, null);
 
         // Create view holder
-        ViewHolder viewHolder = new PantryItemListAdapter.ViewHolder(itemLayoutView);
+        ViewHolder viewHolder = new PantryItemListAdapter.ViewHolder(itemLayoutView, this);
         return viewHolder;
     }
 
@@ -50,16 +50,29 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
         return this.data.size();
     }
 
+    /**
+     * Remove item from the database and reload the view
+     * @param item the item to remove
+     */
+    public void removeItem(Item item) {
+        this.itemDao.delete(item);
+        this.data = this.itemDao.loadAll();
+        this.notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView pantryItemName;
         public Item pantryItem;
 
+        private PantryItemListAdapter adapter;
         private View itemView;
         private ItemDao itemDao;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, PantryItemListAdapter adapter) {
             super(itemView);
+
+            this.adapter = adapter;
 
             // Save references to views for future manipulations
             this.itemView = itemView;
@@ -77,6 +90,14 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
                     } else if (b.getText().equals("Out")) {
                         setItemAmount("High");
                     }
+                }
+            });
+
+            Button removeButton = (Button) itemView.findViewById(R.id.pantry_item_remove_button);
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeItem();
                 }
             });
         }
@@ -125,6 +146,10 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
                 amountButton.setTextColor(Color.BLACK);
                 this.pantryItemName.setTextColor(Color.BLACK);
             }
+        }
+
+        private void removeItem() {
+            this.adapter.removeItem(this.pantryItem);
         }
     }
 }
