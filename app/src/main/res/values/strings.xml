@@ -20,4 +20,6 @@
     <string name="dialog_add_item">Add an item to the Grocery List</string>
     <string name="dialog_add">Add</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="clear_database_label">Clear Database</string>
 </resources>
