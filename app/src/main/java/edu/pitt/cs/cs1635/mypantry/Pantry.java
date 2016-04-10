@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,8 +15,6 @@ import android.widget.TextView;
 public class Pantry extends BaseActivity {
 
     Button btn1;
-    Button btn2;
-    Button btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +40,6 @@ public class Pantry extends BaseActivity {
 
         initNavigationDrawer();
         btn1 = (Button) findViewById(R.id.amt1);
-        btn2 = (Button) findViewById(R.id.amt2);
-        btn3 = (Button) findViewById(R.id.button);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,62 +61,12 @@ public class Pantry extends BaseActivity {
                 }
             }
         });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(btn2.getText().equals("High")){
-                    btn2.setText("Low");
-                    btn2.setTextColor(Color.YELLOW);
-                    ((TextView)findViewById(R.id.item2)).setTextColor(Color.YELLOW);
-                }
-                else if(btn2.getText().equals("Low")){
-                    btn2.setText("Out");
-                    btn2.setTextColor(Color.RED);
-                    ((TextView)findViewById(R.id.item2)).setTextColor(Color.RED);
-                }
-                else if(btn2.getText().equals("Out")){
-                    btn2.setText("High");
-                    btn2.setTextColor(Color.BLACK);
-                    ((TextView)findViewById(R.id.item2)).setTextColor(Color.BLACK);
-                }
-            }
-        });
-
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(btn3.getText().equals("High")){
-                    btn3.setText("Low");
-                    btn3.setTextColor(Color.YELLOW);
-                    ((TextView)findViewById(R.id.textView)).setTextColor(Color.YELLOW);
-                }
-                else if(btn3.getText().equals("Low")){
-                    btn3.setText("Out");
-                    btn3.setTextColor(Color.RED);
-                    ((TextView)findViewById(R.id.textView)).setTextColor(Color.RED);
-                }
-                else if(btn3.getText().equals("Out")){
-                    btn3.setText("High");
-                    btn3.setTextColor(Color.BLACK);
-                    ((TextView)findViewById(R.id.textView)).setTextColor(Color.BLACK);
-                }
-            }
-        });
     }
-
-    @Override
-    // public boolean onCreateOptionsMenu(Menu menu) {
-    //     // Inflate the menu; this adds items to the action bar if it is present.
-    //     getMenuInflater().inflate(R.menu.menu_pantry, menu);
-    //     return true;
-    // }
 
     protected void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==1){
-            View third = (View)findViewById(R.id.view);
-            third.setVisibility(View.VISIBLE);
+            Log.d("DEBUG", data.getStringExtra("name"));
         }
     }
 
