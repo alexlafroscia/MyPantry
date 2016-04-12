@@ -29,7 +29,8 @@ public class ItemDao extends AbstractDao<Item, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Amount = new Property(2, Integer.class, "amount", false, "AMOUNT");
-        public final static Property RecipeId = new Property(3, Long.class, "recipeId", false, "RECIPE_ID");
+        public final static Property OnGroceryList = new Property(3, Boolean.class, "onGroceryList", false, "ON_GROCERY_LIST");
+        public final static Property RecipeId = new Property(4, Long.class, "recipeId", false, "RECIPE_ID");
     };
 
     private Query<Item> recipe_ItemsQuery;
@@ -49,7 +50,8 @@ public class ItemDao extends AbstractDao<Item, Long> {
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"TITLE\" TEXT," + // 1: title
                 "\"AMOUNT\" INTEGER," + // 2: amount
-                "\"RECIPE_ID\" INTEGER);"); // 3: recipeId
+                "\"ON_GROCERY_LIST\" INTEGER," + // 3: onGroceryList
+                "\"RECIPE_ID\" INTEGER);"); // 4: recipeId
     }
 
     /** Drops the underlying database table. */
@@ -77,6 +79,11 @@ public class ItemDao extends AbstractDao<Item, Long> {
         if (amount != null) {
             stmt.bindLong(3, amount);
         }
+ 
+        Boolean onGroceryList = entity.getOnGroceryList();
+        if (onGroceryList != null) {
+            stmt.bindLong(4, onGroceryList ? 1L: 0L);
+        }
     }
 
     /** @inheritdoc */
@@ -91,7 +98,8 @@ public class ItemDao extends AbstractDao<Item, Long> {
         Item entity = new Item( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
-            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2) // amount
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // amount
+            cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0 // onGroceryList
         );
         return entity;
     }
@@ -102,6 +110,7 @@ public class ItemDao extends AbstractDao<Item, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setAmount(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setOnGroceryList(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
      }
     
     /** @inheritdoc */
