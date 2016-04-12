@@ -9,12 +9,13 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/g_list_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/g_list"
-        tools:context="edu.pitt.cs.cs1635.mypantry.GroceryListActivity"/>
+        tools:context="edu.pitt.cs.cs1635.mypantry.GroceryListActivity"
+        />
 
 </LinearLayout>

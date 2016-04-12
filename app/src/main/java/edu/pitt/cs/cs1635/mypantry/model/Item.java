@@ -9,6 +9,7 @@ public class Item {
     private Long id;
     private String title;
     private Integer amount;
+    private Boolean onGroceryList;
 
     public Item() {
     }
@@ -17,10 +18,11 @@ public class Item {
         this.id = id;
     }
 
-    public Item(Long id, String title, Integer amount) {
+    public Item(Long id, String title, Integer amount, Boolean onGroceryList) {
         this.id = id;
         this.title = title;
         this.amount = amount;
+        this.onGroceryList = onGroceryList;
     }
 
     public Long getId() {
@@ -45,6 +47,14 @@ public class Item {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Boolean getOnGroceryList() {
+        return onGroceryList;
+    }
+
+    public void setOnGroceryList(Boolean onGroceryList) {
+        this.onGroceryList = onGroceryList;
     }
 
 }

@@ -55,10 +55,9 @@ public class Pantry extends BaseActivity {
         super.onResume();
 
         // Set up pantry item list
-        List itemList = this.itemDao.loadAll();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.pantry_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        PantryItemListAdapter adapter = new PantryItemListAdapter(itemList, this.itemDao);
+        PantryItemListAdapter adapter = new PantryItemListAdapter(this.itemDao);
         recyclerView.setAdapter(adapter);
     }
 
@@ -68,6 +67,7 @@ public class Pantry extends BaseActivity {
             Item item = new Item();
             item.setTitle(data.getStringExtra("name"));
             item.setAmount(2);  // Default new items to "High"
+            item.setOnGroceryList(false);
             this.itemDao.insertOrReplace(item);
         }
     }

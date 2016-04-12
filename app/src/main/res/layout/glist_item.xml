@@ -1,74 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<com.daimajia.swipe.SwipeLayout
-    xmlns:swipe="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipe"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    swipe:leftEdgeSwipeOffset="0dp"
-    swipe:rightEdgeSwipeOffset="0dp"
-    tools:context=".GroceryListActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.daimajia.swipe.SwipeLayout
+        xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="#FF5534"
-        android:tag="Bottom3"
-        android:weightSum="10"
-        android:saveEnabled="false"
-        android:paddingTop="0dp">
+        android:layout_height="wrap_content"
+        swipe:leftEdgeSwipeOffset="0dp"
+        swipe:rightEdgeSwipeOffset="0dp"
+        tools:context=".GroceryListActivity">
 
-        <Space
-            android:layout_width="100px"
-            android:layout_height="20px" />
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="16dp"
+            android:background="#FF5534"
+            android:tag="Bottom3"
+            android:weightSum="10"
+            android:saveEnabled="false"
+            android:paddingTop="0dp">
 
-        <Button
-            android:id="@+id/remove_item"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:background="#fff"
-            android:text="Remove Item"
-            android:textColor="#FF5534"
-            android:clickable="true"
-            android:layout_weight="1.17"
-            android:layout_gravity="center_vertical" />
+            <Space
+                android:layout_width="100px"
+                android:layout_height="20px" />
 
-        <Space
-            android:layout_width="50px"
-            android:layout_height="20px" />
+            <Button
+                android:id="@+id/gList_item_remove_item"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:background="#fff"
+                android:text="Remove Item"
+                android:textColor="#FF5534"
+                android:clickable="true"
+                android:layout_weight="1.17"
+                android:layout_gravity="center_vertical" />
 
-        <Button
-            android:id="@+id/bought"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:background="#fff"
-            android:text="Item Bought"
-            android:textColor="#FF5534"
-            android:clickable="true"
-            android:layout_weight="1.17"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
+            <Space
+                android:layout_width="50px"
+                android:layout_height="20px" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/item_selector"
-        android:padding="7dp"
-        android:visibility="visible">
+            <Button
+                android:id="@+id/gList_item_bought_item"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:background="#fff"
+                android:text="Item Bought"
+                android:textColor="#FF5534"
+                android:clickable="true"
+                android:layout_weight="1.17"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_data"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:tag="Hover"
-            android:textSize="18sp"
-            android:text="Text goes here" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_selector"
+            android:padding="7dp"
+            android:visibility="visible">
 
-        <TextView
-            android:id="@+id/position"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/gList_item_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:tag="Hover"
+                android:textSize="18sp"
+                android:text="Text goes here" />
 
-    </LinearLayout>
-</com.daimajia.swipe.SwipeLayout>
+            <TextView
+                android:id="@+id/position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </com.daimajia.swipe.SwipeLayout>
+</LinearLayout>

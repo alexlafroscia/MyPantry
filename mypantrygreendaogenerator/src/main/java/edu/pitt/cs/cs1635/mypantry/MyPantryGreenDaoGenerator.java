@@ -30,6 +30,7 @@ public class MyPantryGreenDaoGenerator {
         item.addIdProperty();
         item.addStringProperty("title");
         item.addIntProperty("amount"); // Will be used as an enum for "enough, low, out"
+        item.addBooleanProperty("onGroceryList");
 
         Property recipeId = recipe.addLongProperty("recipeId").getProperty();
         ToMany recipeToItems = recipe.addToMany(item, recipeId);

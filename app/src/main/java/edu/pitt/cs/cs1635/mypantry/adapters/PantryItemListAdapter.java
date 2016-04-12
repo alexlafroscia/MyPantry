@@ -22,9 +22,21 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
     public List<Item> data;
     private ItemDao itemDao;
 
-    public PantryItemListAdapter(List<Item> data, ItemDao itemDao) {
-        this.data = data;
+    public PantryItemListAdapter(ItemDao itemDao) {
         this.itemDao = itemDao;
+        loadData();
+
+        this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                loadData();
+            }
+        });
+    }
+
+    public void loadData() {
+        this.data = this.itemDao.loadAll();
     }
 
     @Override
@@ -56,8 +68,12 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
      */
     public void removeItem(Item item) {
         this.itemDao.delete(item);
-        this.data = this.itemDao.loadAll();
         this.notifyDataSetChanged();
+    }
+
+    public void toggleItemOnGroceryList(Item item) {
+        item.setOnGroceryList(!item.getOnGroceryList());
+        this.itemDao.update(item);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,6 +106,14 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
                     } else if (b.getText().equals("Out")) {
                         setItemAmount("High");
                     }
+                }
+            });
+
+            Button toggleGroceryListButton = (Button) itemView.findViewById(R.id.pantry_item_toggle_grocery_list);
+            toggleGroceryListButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toggleItemOnGroceryList();
                 }
             });
 
@@ -150,6 +174,10 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
 
         private void removeItem() {
             this.adapter.removeItem(this.pantryItem);
+        }
+
+        private void toggleItemOnGroceryList() {
+            this.adapter.toggleItemOnGroceryList(this.pantryItem);
         }
     }
 }
