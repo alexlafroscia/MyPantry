@@ -1,7 +1,6 @@
 package edu.pitt.cs.cs1635.mypantry;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
@@ -9,17 +8,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-
-import java.util.List;
 
 import edu.pitt.cs.cs1635.mypantry.adapters.PantryItemListAdapter;
 import edu.pitt.cs.cs1635.mypantry.model.Item;
+import edu.pitt.cs.cs1635.mypantry.services.Store;
 
 public class Pantry extends BaseActivity {
 
@@ -28,6 +22,10 @@ public class Pantry extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Give the store a context to work with
+        Store.getInstance().initWithContext(this.getApplicationContext());
+
         setContentView(R.layout.activity_pantry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,12 +61,8 @@ public class Pantry extends BaseActivity {
 
     protected void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode==1){
-            Item item = new Item();
-            item.setTitle(data.getStringExtra("name"));
-            item.setAmount(2);  // Default new items to "High"
-            item.setOnGroceryList(false);
-            this.itemDao.insertOrReplace(item);
+        if(requestCode==1 && resultCode == 1){
+            Store.getInstance().createItem(data.getStringExtra("name"));
         }
     }
 

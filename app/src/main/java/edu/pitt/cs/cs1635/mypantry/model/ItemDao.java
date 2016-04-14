@@ -1,6 +1,5 @@
 package edu.pitt.cs.cs1635.mypantry.model;
 
-import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -8,8 +7,6 @@ import android.database.sqlite.SQLiteStatement;
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;
 import de.greenrobot.dao.internal.DaoConfig;
-import de.greenrobot.dao.query.Query;
-import de.greenrobot.dao.query.QueryBuilder;
 
 import edu.pitt.cs.cs1635.mypantry.model.Item;
 
@@ -30,10 +27,8 @@ public class ItemDao extends AbstractDao<Item, Long> {
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Amount = new Property(2, Integer.class, "amount", false, "AMOUNT");
         public final static Property OnGroceryList = new Property(3, Boolean.class, "onGroceryList", false, "ON_GROCERY_LIST");
-        public final static Property RecipeId = new Property(4, Long.class, "recipeId", false, "RECIPE_ID");
     };
 
-    private Query<Item> recipe_ItemsQuery;
 
     public ItemDao(DaoConfig config) {
         super(config);
@@ -50,8 +45,7 @@ public class ItemDao extends AbstractDao<Item, Long> {
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"TITLE\" TEXT," + // 1: title
                 "\"AMOUNT\" INTEGER," + // 2: amount
-                "\"ON_GROCERY_LIST\" INTEGER," + // 3: onGroceryList
-                "\"RECIPE_ID\" INTEGER);"); // 4: recipeId
+                "\"ON_GROCERY_LIST\" INTEGER);"); // 3: onGroceryList
     }
 
     /** Drops the underlying database table. */
@@ -136,18 +130,4 @@ public class ItemDao extends AbstractDao<Item, Long> {
         return true;
     }
     
-    /** Internal query to resolve the "items" to-many relationship of Recipe. */
-    public List<Item> _queryRecipe_Items(Long recipeId) {
-        synchronized (this) {
-            if (recipe_ItemsQuery == null) {
-                QueryBuilder<Item> queryBuilder = queryBuilder();
-                queryBuilder.where(Properties.RecipeId.eq(null));
-                recipe_ItemsQuery = queryBuilder.build();
-            }
-        }
-        Query<Item> query = recipe_ItemsQuery.forCurrentThread();
-        query.setParameter(0, recipeId);
-        return query.list();
-    }
-
 }

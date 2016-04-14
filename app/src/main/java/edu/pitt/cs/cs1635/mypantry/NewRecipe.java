@@ -1,8 +1,8 @@
 package edu.pitt.cs.cs1635.mypantry;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,14 +13,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.mypantry.adapters.RecipeItemListAdapter;
+import edu.pitt.cs.cs1635.mypantry.model.Item;
+import edu.pitt.cs.cs1635.mypantry.model.Recipe;
+import edu.pitt.cs.cs1635.mypantry.services.Store;
+
 public class NewRecipe extends BaseActivity {
 
-    public ArrayList<String> ingredients = new ArrayList<> ();
+    public ArrayList<Item> ingredients = new ArrayList<>();
     Context context;
-    public int numIngredients = 0;
     public ArrayAdapter adapter;
     ListView listView;
 
@@ -40,36 +45,48 @@ public class NewRecipe extends BaseActivity {
 
         initNavigationDrawer();
 
-        adapter = new ArrayAdapter<>(this, R.layout.list, ingredients);
+        adapter = new RecipeItemListAdapter(this, ingredients);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+        final Store store = Store.getInstance();
+
         Button button = (Button)findViewById(R.id.button_add);
         button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 EditText entry = (EditText) findViewById(R.id.new_ingredient);
-                String ing = entry.getText().toString();
-                ingredients.add(ing);
-                numIngredients++;
-                adapter.notifyDataSetChanged();
-                entry.setText("");
-                setListViewHeightBasedOnChildren(listView);
+                String ingredientName = entry.getText().toString();
+                Item searchResult = store.getItem(ingredientName);
+
+                if (searchResult != null) {
+                    ingredients.add(searchResult);
+                    adapter.notifyDataSetChanged();
+                    entry.setText("");
+                    setListViewHeightBasedOnChildren(listView);
+                }
             }
         });
-
     }
 
     public void submitRecipe(View v){
         String name = ((EditText) findViewById(R.id.new_name)).getText().toString();
         String directions = ((EditText) findViewById(R.id.new_directions)).getText().toString();
 
-        Intent intent = new Intent();
-        intent.putExtra("new_name", name);
-        intent.putExtra("new_ingredients", ingredients);
-        intent.putExtra("new_directions", directions);
-        setResult(RESULT_OK, intent);
+        Store store = Store.getInstance();
+
+        Recipe recipe = new Recipe();
+        recipe.setTitle(name);
+        recipe.setDirections(directions);
+
+        // Need to save the recipe before we can add the items,
+        store.saveRecipe(recipe);
+
+        for (Item item : ingredients) {
+            store.addItemToRecipe(item, recipe);
+        }
+
+        setResult(RESULT_OK);
         finish();
     }
 
@@ -92,5 +109,4 @@ public class NewRecipe extends BaseActivity {
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
-
 }

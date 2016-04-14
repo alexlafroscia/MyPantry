@@ -13,6 +13,7 @@ import java.util.List;
 import edu.pitt.cs.cs1635.mypantry.R;
 import edu.pitt.cs.cs1635.mypantry.model.Item;
 import edu.pitt.cs.cs1635.mypantry.model.ItemDao;
+import edu.pitt.cs.cs1635.mypantry.services.Store;
 
 /**
  * Created by alex on 4/9/16.
@@ -36,7 +37,8 @@ public class PantryItemListAdapter extends RecyclerView.Adapter<PantryItemListAd
     }
 
     public void loadData() {
-        this.data = this.itemDao.loadAll();
+        Store store = Store.getInstance();
+        this.data = store.getItems();
     }
 
     @Override

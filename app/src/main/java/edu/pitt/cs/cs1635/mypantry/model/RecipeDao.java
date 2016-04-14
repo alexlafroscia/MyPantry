@@ -26,10 +26,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Directions = new Property(2, String.class, "directions", false, "DIRECTIONS");
-        public final static Property RecipeId = new Property(3, Long.class, "recipeId", false, "RECIPE_ID");
     };
-
-    private DaoSession daoSession;
 
 
     public RecipeDao(DaoConfig config) {
@@ -38,7 +35,6 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
     
     public RecipeDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
-        this.daoSession = daoSession;
     }
 
     /** Creates the underlying database table. */
@@ -47,8 +43,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"RECIPE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"TITLE\" TEXT," + // 1: title
-                "\"DIRECTIONS\" TEXT," + // 2: directions
-                "\"RECIPE_ID\" INTEGER);"); // 3: recipeId
+                "\"DIRECTIONS\" TEXT);"); // 2: directions
     }
 
     /** Drops the underlying database table. */
@@ -76,17 +71,6 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         if (directions != null) {
             stmt.bindString(3, directions);
         }
- 
-        Long recipeId = entity.getRecipeId();
-        if (recipeId != null) {
-            stmt.bindLong(4, recipeId);
-        }
-    }
-
-    @Override
-    protected void attachEntity(Recipe entity) {
-        super.attachEntity(entity);
-        entity.__setDaoSession(daoSession);
     }
 
     /** @inheritdoc */
@@ -101,8 +85,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         Recipe entity = new Recipe( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // directions
-            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // recipeId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // directions
         );
         return entity;
     }
@@ -113,7 +96,6 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDirections(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setRecipeId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
      }
     
     /** @inheritdoc */

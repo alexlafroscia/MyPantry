@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class RecipeDetail extends BaseActivity {
+import edu.pitt.cs.cs1635.mypantry.adapters.RecipeItemListAdapter;
+import edu.pitt.cs.cs1635.mypantry.model.Recipe;
+import edu.pitt.cs.cs1635.mypantry.services.Store;
 
-    String name;
-    ArrayList<String> ingredients;
-    String directions;
+public class RecipeDetail extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +33,20 @@ public class RecipeDetail extends BaseActivity {
         initNavigationDrawer();
 
         Intent intent = getIntent();
-        name = intent.getStringExtra("RECIPE_NAME");
-        directions = intent.getStringExtra("RECIPE_DIRECTIONS");
-        ingredients  = intent.getStringArrayListExtra("RECIPE_ING");
+        Long id = intent.getLongExtra("RECIPE_ID", 0);
 
+        Store store = Store.getInstance();
+        Recipe recipe = store.getRecipe(id);
 
         TextView r = (TextView) this.findViewById(R.id.rec_name);
-        r.setText(name);
+        r.setText(recipe.getTitle());
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.list, ingredients);
+        ArrayAdapter adapter = new RecipeItemListAdapter(this, store.getItemsForRecipe(recipe));
         ListView listView = (ListView) findViewById(R.id.listView2);
         listView.setAdapter(adapter);
 
         TextView r4 = (TextView) this.findViewById(R.id.rec_directions);
-        r4.setText(directions);
+        r4.setText(recipe.getDirections());
 
     }
 }

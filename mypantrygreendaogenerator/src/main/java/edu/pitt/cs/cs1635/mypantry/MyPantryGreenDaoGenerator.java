@@ -32,9 +32,13 @@ public class MyPantryGreenDaoGenerator {
         item.addIntProperty("amount"); // Will be used as an enum for "enough, low, out"
         item.addBooleanProperty("onGroceryList");
 
-        Property recipeId = recipe.addLongProperty("recipeId").getProperty();
-        ToMany recipeToItems = recipe.addToMany(item, recipeId);
-        recipeToItems.setName("items");
+        Entity recipeItem = schema.addEntity("RecipeItem");
+        // Add relationship to a recipe
+        Property recipeRelationshipProperty = recipeItem.addLongProperty("recipeId").getProperty();
+        recipeItem.addToOne(recipe, recipeRelationshipProperty);
+        // Add relationship to an item
+        Property itemRelationshipProperty = recipeItem.addLongProperty("itemId").getProperty();
+        recipeItem.addToOne(item, itemRelationshipProperty);
 
         new DaoGenerator().generateAll(schema, "../app/src/main/java");
     }
